@@ -2,41 +2,39 @@
 
 [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://behackfest-svhjrashpisptdjz5kmjfw.streamlit.app/)
 
-A powerful time-series anomaly detection system using AutoEncoders, Dynamic Thresholding (POT), and Interactive Plotly Dashboards.
+A powerful time-series anomaly detection system using AutoEncoders, Dynamic Thresholding (POT), and AI-powered diagnostics with an Interactive Plotly Dashboard.
 
 🔗 **Live Demo**: [behackfest-svhjrashpisptdjz5kmjfw.streamlit.app](https://behackfest-svhjrashpisptdjz5kmjfw.streamlit.app/)
 
+---
+
 ## 🛠️ Setup & Installation
 
-Before running the application, install the required Python dependencies:
-
 ```bash
-pip install streamlit plotly pandas numpy scikit-learn torch matplotlib kaleido nbformat
+pip install -r requirements.txt
 ```
 
 ## 🚀 How to Run
 
 ### 1. Generate Sample Data
-Create a set of synthetic sensor data and operator logs with pre-defined anomalies for testing:
 ```bash
 python generate_data.py
 ```
 
-### 2. Run the Processing Pipeline (CLI/Dev Mode)
-Run the full detection and alignment logic to generate static and interactive reports:
+### 2. Run CLI Pipeline (Dev Mode)
+Generates static and interactive reports locally:
 ```bash
 python demo_app.py
 ```
-**Outputs:**
-- `anomaly_dashboard.html`: Fully interactive Plotly dashboard.
-- `anomaly_events_plot.png`: Static image preview of the results.
+**Outputs:** `anomaly_dashboard.html`, `anomaly_events_plot.png`
 
-### 3. Launch the Web Dashboard (Production UI)
-Run the professional Streamlit interface for interactive data exploration and CSV uploads:
+### 3. Launch Web Dashboard
 ```bash
 python -m streamlit run app.py
 ```
-- Access it at: http://localhost:8502
+Access at: http://localhost:8502
+
+---
 
 ## 🏗️ System Architecture
 
@@ -54,30 +52,61 @@ graph TD
     I --> J["Interactive Dashboard (Plotly/Streamlit)"]
 ```
 
+---
+
 ## 🧠 Core Components
 
-- **AutoEncoder (Behavioral)**: A neural network trained on normal state data. It learns to reconstruct sensor patterns; high reconstruction error signals a behavioral anomaly.
-- **Rolling Correlation (Structural)**: Monitors the relationships between sensor signals. If sensors that normally move together suddenly diverge, a structural anomaly is flagged.
-- **Peak Over Threshold (POT)**: A dynamic thresholding strategy that adapts to data noise levels, ensuring the system remains sensitive without being overwhelmed by false positives.
-- **LLM Parser**: Analyzes operator logs for keywords (Fault, Leak, Overload) to categorize human-observed issues alongside machine-detected anomalies.
+| Component | Description |
+|---|---|
+| **AutoEncoder** | Neural network trained on normal data; high reconstruction error = behavioral anomaly |
+| **Rolling Correlation** | Monitors sensor relationships; divergence = structural anomaly |
+| **Peak Over Threshold (POT)** | Dynamic thresholding that adapts to noise levels |
+| **LLM Diagnostics** | AI-powered root cause analysis using Groq / Gemini / OpenAI |
+| **LLM Log Parser** | Keyword-based operator log categorization |
+
+---
+
+## 🤖 AI Diagnostic Providers
+
+The dashboard supports multiple AI providers for event diagnosis:
+
+| Provider | Model | Cost | Get Key |
+|---|---|---|---|
+| **Groq** ⭐ Recommended | Llama 3.1 8B Instant | Free | [console.groq.com](https://console.groq.com) |
+| **Gemini** | Gemini 1.5 Flash | Free | [aistudio.google.com](https://aistudio.google.com) |
+| **OpenAI** | GPT-3.5 Turbo | Paid | [platform.openai.com](https://platform.openai.com) |
+| **Ollama** | Llama 3.2 | Free (local only) | — |
+
+> **Note**: Ollama works only when running the app locally on your machine.
+
+---
 
 ## 📂 Project Structure
 
-- `app.py`: Main Streamlit Web Application.
-- `demo_app.py`: CLI-based detection pipeline.
-- `anomaly_model.py`: AutoEncoder-based behavioral detection logic.
-- `structure_model.py`: Rolling-correlation structural detection.
-- `plotting.py`: Plotly-based visualization engine.
-- `generate_data.py`: Synthetic data generator.
-- `preprocessing.py`: Multi-sensor synchronization and windowing.
-- `event_builder.py` & `clustering.py`: Event grouping and severity scoring.
-- `llm_parser.py`: Semantic operator log parsing.
+| File | Purpose |
+|---|---|
+| `app.py` | Main Streamlit Web Application |
+| `demo_app.py` | CLI-based detection pipeline |
+| `anomaly_model.py` | AutoEncoder behavioral detection |
+| `structure_model.py` | Rolling-correlation structural detection |
+| `plotting.py` | Plotly-based visualization engine |
+| `llm_service.py` | Multi-provider AI diagnostic service |
+| `llm_parser.py` | Operator log keyword parser |
+| `preprocessing.py` | Multi-sensor synchronization & windowing |
+| `event_builder.py` | Event grouping logic |
+| `clustering.py` | K-Means severity scoring |
+| `generate_data.py` | Synthetic data generator |
 
-## 📊 Dashboard Elements
-- **Red Regions**: High Severity Events (Cluster 1).
-- **Orange/Yellow Regions**: Standard Anomaly Events (Cluster 0).
-- **Red Stars**: Event Midpoints/Peaks.
-- **Vertical Red Dashed Lines**: Operator Log entries (Hover to read text).
+---
+
+## 📊 Dashboard Guide
+
+- 🔴 **Red Regions** — High Severity Events (Cluster 1)
+- 🟠 **Orange/Yellow Regions** — Standard Anomaly Events (Cluster 0)
+- ⭐ **Red Stars** — Event Midpoints/Peaks
+- **Vertical Red Dashed Lines** — Operator Log entries (hover to read)
+
+---
 
 ## 📄 License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
