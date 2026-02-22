@@ -101,12 +101,12 @@ The dashboard supports multiple AI providers for event diagnosis:
 
 ##  Dashboard Guide
 
--  **Red Regions** — High Severity Events (Cluster 1)
--  **Orange/Yellow Regions** — Standard Anomaly Events (Cluster 0)
--  **Red Stars** — Event Midpoints/Peaks
-- **Vertical Red Dashed Lines** — Operator Log entries (hover to read)
+-  **Red Regions** - High Severity Events (Cluster 1)
+-  **Orange/Yellow Regions** - Standard Anomaly Events (Cluster 0)
+-  **Red Stars** - Event Midpoints/Peaks
+- **Vertical Red Dashed Lines** - Operator Log entries (hover to read)
 
 ---
 
 ## 📄 License
-This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
