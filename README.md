@@ -74,3 +74,6 @@ graph TD
 - **Orange/Yellow Regions**: Standard Anomaly Events (Cluster 0).
 - **Red Stars**: Event Midpoints/Peaks.
 - **Vertical Red Dashed Lines**: Operator Log entries (Hover to read text).
+
+## 📄 License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
