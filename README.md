@@ -1,6 +1,10 @@
 # Anomaly Detection & Diagnostic System
 
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://behackfest-svhjrashpisptdjz5kmjfw.streamlit.app/)
+
 A powerful time-series anomaly detection system using AutoEncoders, Dynamic Thresholding (POT), and Interactive Plotly Dashboards.
+
+🔗 **Live Demo**: [behackfest-svhjrashpisptdjz5kmjfw.streamlit.app](https://behackfest-svhjrashpisptdjz5kmjfw.streamlit.app/)
 
 ## 🛠️ Setup & Installation
 
