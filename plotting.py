@@ -178,15 +178,12 @@ def plot_events_and_logs(windows, events, timeseries_csv, log_csv):
     fig.update_yaxes(title_text="Anomaly Score", row=1, col=1)
     fig.update_yaxes(title_text="Sensor Value", row=2, col=1)
 
-    # Save outputs
-    fig.write_html("anomaly_dashboard.html")
-    # Try to save static image
+    # Save outputs (local/CLI only — skipped silently on Streamlit Cloud)
     try:
-        import kaleido
+        fig.write_html("anomaly_dashboard.html")
         fig.write_image("anomaly_events_plot.png")
-        print("\n[Plotting] Static preview updated at anomaly_events_plot.png")
-    except ImportError:
-        pass
+        print("[Plotting] Static outputs saved: anomaly_dashboard.html, anomaly_events_plot.png")
+    except Exception:
+        pass  # Cloud environment — file writes and Kaleido not available
 
-    print(f"[Plotting] INTERACTIVE DASHBOARD READY: anomaly_dashboard.html")
     return fig
