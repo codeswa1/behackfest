@@ -21,7 +21,7 @@ TASK: Provide a brief Root Cause, Reasoning, and Recommended Actions. Keep it un
             from groq import Groq
             client = Groq(api_key=api_key)
             response = client.chat.completions.create(
-                model="llama3-8b-8192",  # Free, fast Llama 3 on Groq
+                model="llama-3.1-8b-instant",  # Free, fast Llama 3.1 on Groq
                 messages=[
                     {"role": "system", "content": "You are a concise technical diagnostic assistant for industrial anomaly detection systems."},
                     {"role": "user", "content": prompt}
