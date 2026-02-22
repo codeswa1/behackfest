@@ -8,3 +8,5 @@ matplotlib
 kaleido
 nbformat
 openai
+groq
+google-generativeai

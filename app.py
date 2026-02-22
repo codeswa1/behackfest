@@ -24,12 +24,27 @@ uploaded_logs = st.sidebar.file_uploader("Upload Operator Logs CSV", type=["csv"
 # AI Diagnostic Configuration
 st.sidebar.divider()
 st.sidebar.header("AI Diagnostic Settings")
-ai_mode = st.sidebar.radio("AI Provider", ["Ollama (Local)", "OpenAI (Cloud)"])
-if ai_mode == "OpenAI (Cloud)":
-    api_key = st.sidebar.text_input("Enter OpenAI API Key", type="password")
+ai_mode = st.sidebar.radio(
+    "AI Provider",
+    ["Groq (Free)", "Gemini (Free)", "OpenAI", "Ollama (Local)"],
+    help="Groq and Gemini have free tiers. Ollama works locally only."
+)
+
+if ai_mode == "Groq (Free)":
+    st.sidebar.markdown("**Free** · Get key at [console.groq.com](https://console.groq.com)")
+    api_key = st.sidebar.text_input("Groq API Key", type="password")
+    ai_provider = "groq"
+elif ai_mode == "Gemini (Free)":
+    st.sidebar.markdown("**Free** · Get key at [aistudio.google.com](https://aistudio.google.com)")
+    api_key = st.sidebar.text_input("Gemini API Key", type="password")
+    ai_provider = "gemini"
+elif ai_mode == "OpenAI":
+    api_key = st.sidebar.text_input("OpenAI API Key", type="password")
+    ai_provider = "openai"
 else:
-    st.sidebar.info("Using local **Ollama** with `llama3.2:latest`.")
+    st.sidebar.info("Using local **Ollama** with `llama3.2:latest`. Does not work on cloud.")
     api_key = "local_ollama"
+    ai_provider = "ollama"
 
 if uploaded_ts and uploaded_logs:
     # Save temporary files
@@ -156,7 +171,7 @@ if uploaded_ts and uploaded_logs:
                     st.markdown(f"####  Advanced AI Reasoning ({ai_mode})")
                     with st.spinner(f"Generating Analysis for Event {i}..."):
                         from llm_service import get_ai_diagnosis
-                        real_diagnosis = get_ai_diagnosis(api_key, context)
+                        real_diagnosis = get_ai_diagnosis(api_key, context, provider=ai_provider)
                         st.markdown(real_diagnosis)
     else:
         st.success("System is operating within normal behavioral parameters. No active insights required.")
