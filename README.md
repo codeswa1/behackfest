@@ -8,13 +8,13 @@ A powerful time-series anomaly detection system using AutoEncoders, Dynamic Thre
 
 ---
 
-## 🛠️ Setup & Installation
+##  Setup & Installation
 
 ```bash
 pip install -r requirements.txt
 ```
 
-## 🚀 How to Run
+##  How to Run
 
 ### 1. Generate Sample Data
 ```bash
@@ -36,7 +36,7 @@ Access at: http://localhost:8502
 
 ---
 
-## 🏗️ System Architecture
+##  System Architecture
 
 ```mermaid
 graph TD
@@ -54,7 +54,7 @@ graph TD
 
 ---
 
-## 🧠 Core Components
+##  Core Components
 
 | Component | Description |
 |---|---|
@@ -66,7 +66,7 @@ graph TD
 
 ---
 
-## 🤖 AI Diagnostic Providers
+##  AI Diagnostic Providers
 
 The dashboard supports multiple AI providers for event diagnosis:
 
@@ -81,7 +81,7 @@ The dashboard supports multiple AI providers for event diagnosis:
 
 ---
 
-## 📂 Project Structure
+##  Project Structure
 
 | File | Purpose |
 |---|---|
@@ -99,14 +99,14 @@ The dashboard supports multiple AI providers for event diagnosis:
 
 ---
 
-## 📊 Dashboard Guide
+##  Dashboard Guide
 
-- 🔴 **Red Regions** — High Severity Events (Cluster 1)
-- 🟠 **Orange/Yellow Regions** — Standard Anomaly Events (Cluster 0)
-- ⭐ **Red Stars** — Event Midpoints/Peaks
-- **Vertical Red Dashed Lines** — Operator Log entries (hover to read)
+-  **Red Regions** - High Severity Events (Cluster 1)
+-  **Orange/Yellow Regions** - Standard Anomaly Events (Cluster 0)
+-  **Red Stars** - Event Midpoints/Peaks
+- **Vertical Red Dashed Lines** - Operator Log entries (hover to read)
 
 ---
 
 ## 📄 License
-This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
