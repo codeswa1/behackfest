@@ -37,8 +37,10 @@ TASK: Provide a brief Root Cause, Reasoning, and Recommended Actions. Keep it un
             import google.generativeai as genai
             genai.configure(api_key=api_key)
             
-            # Try several model variations to find one that is active for the user's region/account
+            # Expanded list including Gemini 2.0 models
             models_to_try = [
+                "gemini-2.0-flash",
+                "gemini-2.0-flash-exp",
                 "gemini-1.5-flash-latest",
                 "gemini-1.5-flash", 
                 "gemini-1.5-pro-latest",
@@ -54,9 +56,10 @@ TASK: Provide a brief Root Cause, Reasoning, and Recommended Actions. Keep it un
                     return response.text
                 except Exception as e:
                     last_error = e
-                    if "404" in str(e) or "not found" in str(e).lower():
-                        continue # Try next model
-                    break # Stop if it's a different error (e.g., Auth)
+                    # Continue if model not found or not supported for this method
+                    if "404" in str(e) or "not found" in str(e).lower() or "not supported" in str(e).lower():
+                        continue 
+                    break 
             
             raise last_error if last_error else Exception("Gemini models unavailable.")
 
