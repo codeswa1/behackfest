@@ -36,9 +36,18 @@ TASK: Provide a brief Root Cause, Reasoning, and Recommended Actions. Keep it un
         elif provider == "gemini":
             import google.generativeai as genai
             genai.configure(api_key=api_key)
-            model = genai.GenerativeModel("gemini-1.5-flash") # Current standard for fast/free
-            response = model.generate_content(prompt)
-            return response.text
+            try:
+                # Try the latest standard name
+                model = genai.GenerativeModel("gemini-1.5-flash")
+                response = model.generate_content(prompt)
+                return response.text
+            except Exception as e:
+                if "404" in str(e) or "not found" in str(e).lower():
+                    # Fallback to the older but very stable gemini-pro if 1.5-flash is unavailable
+                    model = genai.GenerativeModel("gemini-pro")
+                    response = model.generate_content(prompt)
+                    return response.text
+                raise e
 
         elif provider == "openai":
             from openai import OpenAI
