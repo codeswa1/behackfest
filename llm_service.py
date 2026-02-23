@@ -37,27 +37,28 @@ TASK: Provide a brief Root Cause, Reasoning, and Recommended Actions. Keep it un
             import google.generativeai as genai
             genai.configure(api_key=api_key)
             
-            # Expanded list including Gemini 2.0 models
+            # Models found in diagnostic script
             models_to_try = [
                 "gemini-2.0-flash",
-                "gemini-2.0-flash-exp",
+                "gemini-2.5-flash",
+                "gemini-flash-latest",
+                "gemini-2.0-flash-lite",
+                "gemini-pro-latest",
                 "gemini-1.5-flash-latest",
-                "gemini-1.5-flash", 
-                "gemini-1.5-pro-latest",
-                "gemini-1.5-pro",
-                "gemini-pro"
+                "gemini-1.5-flash"
             ]
             
             last_error = None
             for model_name in models_to_try:
                 try:
+                    # The SDK usually handles both 'model-name' and 'models/model-name'
                     model = genai.GenerativeModel(model_name)
                     response = model.generate_content(prompt)
                     return response.text
                 except Exception as e:
                     last_error = e
-                    # Continue if model not found or not supported for this method
-                    if "404" in str(e) or "not found" in str(e).lower() or "not supported" in str(e).lower():
+                    error_msg = str(e).lower()
+                    if "404" in error_msg or "not found" in error_msg or "not supported" in error_msg:
                         continue 
                     break 
             
