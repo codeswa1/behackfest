@@ -25,24 +25,26 @@ uploaded_logs = st.sidebar.file_uploader("Upload Operator Logs CSV", type=["csv"
 st.sidebar.divider()
 st.sidebar.header("AI Diagnostic Settings")
 ai_mode = st.sidebar.radio(
-    "AI Provider",
+    "Select AI Provider",
     ["Groq (Free)", "Gemini (Free)", "OpenAI", "Ollama (Local)"],
-    help="Groq and Gemini have free tiers. Ollama works locally only."
+    help="Groq and Gemini have free tiers. Ollama requires the Ollama app to be running locally.",
+    index=0
 )
 
 if ai_mode == "Groq (Free)":
-    st.sidebar.markdown("**Free** · Get key at [console.groq.com](https://console.groq.com)")
-    api_key = st.sidebar.text_input("Groq API Key", type="password")
+    st.sidebar.markdown("🚀 **Groq** · Model: `llama-3.1-8b-instant`")
+    api_key = st.sidebar.text_input("Enter Groq API Key", type="password", help="Get your key at console.groq.com")
     ai_provider = "groq"
 elif ai_mode == "Gemini (Free)":
-    st.sidebar.markdown("**Free** · Get key at [aistudio.google.com](https://aistudio.google.com)")
-    api_key = st.sidebar.text_input("Gemini API Key", type="password")
+    st.sidebar.markdown("♊ **Gemini** · Model: `gemini-1.5-flash`")
+    api_key = st.sidebar.text_input("Enter Gemini API Key", type="password", help="Get your key at aistudio.google.com")
     ai_provider = "gemini"
 elif ai_mode == "OpenAI":
-    api_key = st.sidebar.text_input("OpenAI API Key", type="password")
+    st.sidebar.markdown("🤖 **OpenAI** · Model: `gpt-3.5-turbo`")
+    api_key = st.sidebar.text_input("Enter OpenAI API Key", type="password")
     ai_provider = "openai"
 else:
-    st.sidebar.info("Using local **Ollama** with `llama3.2:latest`. Does not work on cloud.")
+    st.sidebar.info("🏠 **Ollama** · Model: `llama3.2:latest`\n\nEnsure Ollama is running on your machine.")
     api_key = "local_ollama"
     ai_provider = "ollama"
 

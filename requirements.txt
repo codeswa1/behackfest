@@ -10,3 +10,4 @@ nbformat
 openai
 groq
 google-generativeai
+ollama
